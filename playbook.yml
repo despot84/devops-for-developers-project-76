@@ -1,0 +1,36 @@
+- name: Деплой Docker-образов с помощью Ansible
+  hosts: all
+  gather_facts: false
+  become_method: runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+
+  tasks:
+      - name: pip install
+      ansible.builtin.pip:
+        name: docker
+      tags: req
+
+    - name: Copy .env
+      ansible.builtin.template:
+        src: .env.j2
+        dest: .env
+        mode: '0644'
+        owner: root
+        group: root
+      become: true
+
+    - name: Deploy Redmine
+      community.docker.docker_container:
+        name: redmine
+        image: "redmine:alpine3.21"
+        restart_policy: always
+        state: started
+        env_file: .env
+        ports: "{{ redmine_port }}:{{ redmine_port }}"
+      tags: deploy
+    
+    - name: start datadog
+      import_role:
+        name: datadog.datadog
+      become: yes
+      when: "'webservers' in group_names"
