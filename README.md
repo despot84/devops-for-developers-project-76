@@ -14,7 +14,6 @@
 
 ```bash
 git clone git@github.com:despot84/devops-for-developers-project-76/.git
-cd js-fastify-blog
 ```
 **Выполнить**
 
