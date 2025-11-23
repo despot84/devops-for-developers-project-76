@@ -1,0 +1,52 @@
+- name: Обновление пакетов
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Установка необходимых зависимостей
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: Добавление GPG ключа Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: true
+
+- name: Получение версии Ubuntu
+  shell: cat /etc/os-release
+  register: os_release
+
+- name: Установка переменной для кодового имени
+  set_fact:
+    ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
+
+- name: Добавление репозитория Docker
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version }} stable
+    state: present
+  become: true  
+
+- name: Установка Docker CE
+  apt:
+    name: docker-ce
+    state: latest
+  become: true
+
+# - name: add {{ ansible_user }}
+#   shell: |
+#     usermod -aG docker {{ ansible_user }}
+#     newgrp docker
+#   become: true
+
+
+- name: Убедиться, что Docker запущен
+  service:
+    name: docker
+    state: started
+    enabled: yes
