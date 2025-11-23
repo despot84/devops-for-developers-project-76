@@ -3,7 +3,7 @@
     dir: vars
 
 - name: Create data directories
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: root
