@@ -14,16 +14,6 @@
       include_role:
         name: redmine_install  
 
-    - name: Отладка групп
-      debug:
-        var: groups
-        # msg: "{{ groups }}"
-
-    - name: Get backend_servers
-      set_fact: 
-        backend_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
-      # run_once: true
-
     - name: nginx_install
       when: "'load_balancer' in group_names"
       include_role:
