@@ -8,7 +8,6 @@
     - /opt/redmine/data
     - /opt/redmine/files
     - /opt/redmine/plugins
-    
   become: true
 
 - name: Copy .env
