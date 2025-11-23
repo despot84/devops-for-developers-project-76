@@ -26,7 +26,7 @@
 
 - name: Установка переменной для кодового имени
   ansible.builtin.set_fact:
-    docker_install_ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
+    docker_install_ubuntu_version: "{{ docker_install_os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
 
 - name: Добавление репозитория Docker
   ansible.builtin.apt_repository:
