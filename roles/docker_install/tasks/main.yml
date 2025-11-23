@@ -1,6 +1,6 @@
 - name: Обновление пакетов
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
   become: true
 
 - name: Установка необходимых зависимостей
