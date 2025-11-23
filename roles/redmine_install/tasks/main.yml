@@ -1,7 +1,3 @@
-- name: Include vars from role
-  include_vars:
-    dir: vars
-
 - name: Create data directories
   ansible.builtin.file:
     path: "{{ item }}"
@@ -12,6 +8,7 @@
     - /opt/redmine/data
     - /opt/redmine/files
     - /opt/redmine/plugins
+    
   become: true
 
 - name: Copy .env
