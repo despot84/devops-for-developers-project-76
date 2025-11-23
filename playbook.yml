@@ -8,6 +8,7 @@
     - name: docker_install
       include_role:
         name: docker_install
+      tags: req
 
     - name: redmine_install
       when: "'webservers' in group_names"
