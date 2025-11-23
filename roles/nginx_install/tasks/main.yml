@@ -8,7 +8,7 @@
     dir: vars
 
 - name: Create nginx config directory
-  file:
+  ansible.builtin.file:
     path: /etc/nginx/conf.d
     state: directory
     mode: '0755'
