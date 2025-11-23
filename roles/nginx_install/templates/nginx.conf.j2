@@ -4,7 +4,7 @@ events {
 
 http {
     upstream backend {
-        {% for server in backend_servers %}
+        {% for server in nginx_install_backend_servers %}
         server {{ server }}:{{ redmine_port }};
         {% endfor %}
     }
