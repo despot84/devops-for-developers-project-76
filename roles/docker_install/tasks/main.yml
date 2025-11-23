@@ -12,6 +12,7 @@
       - curl
       - software-properties-common
     state: present
+  ignore_errors: true
 
 - name: Добавление GPG ключа Docker
   apt_key:
