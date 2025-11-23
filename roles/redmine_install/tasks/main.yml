@@ -2,8 +2,8 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    owner: root
-    group: root
+    # owner: root
+    # group: root
   loop:
     - /opt/redmine/data
     - /opt/redmine/files
@@ -15,8 +15,8 @@
     src: .env.j2
     dest: /opt/redmine/.env
     mode: '0644'
-    owner: root
-    group: root
+    # owner: root
+    # group: root
   become: true
 
 - name: Deploy Redmine
