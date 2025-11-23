@@ -37,6 +37,7 @@
   apt:
     name: docker-ce
     state: latest
+    update_cache: yes
   become: true
 
 # - name: add {{ ansible_user }}
@@ -46,9 +47,9 @@
 #   become: true
 
 
-- name: Убедиться, что Docker запущен
-  service:
-    name: docker
-    state: started
-    enabled: yes
-  become: true
+# - name: Убедиться, что Docker запущен
+#   service:
+#     name: docker
+#     state: started
+#     enabled: yes
+#   become: true
