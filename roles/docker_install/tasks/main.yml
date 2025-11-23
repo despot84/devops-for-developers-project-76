@@ -25,18 +25,13 @@
   # register: docker_install_os
   ansible.builtin.setup:
 
-- name: Получить версию Ubuntu
-  debug:
-    msg: "Версия Ubuntu: {{ ansible_distribution_version }}"
-
 # - name: Установка переменной для кодового имени
 #   ansible.builtin.set_fact:
 #     docker_install_os_version: "{{ docker_install_os.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
 
-
 - name: Добавление репозитория Docker
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_version }} stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     state: present
   # vars:
   #   ubuntu_version: "{{ docker_install_os.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
