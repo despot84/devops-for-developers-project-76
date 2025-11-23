@@ -37,7 +37,7 @@
 - name: Установка Docker CE
   ansible.builtin.apt:
     name: docker-ce
-    state: latest
+    state: present
     update_cache: true
   become: true
 
