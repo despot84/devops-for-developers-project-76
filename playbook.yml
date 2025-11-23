@@ -16,9 +16,11 @@
 
     - name: Отладка групп
       debug:
-        msg: "{{ groups }}"
+        var: groups
+        # msg: "{{ groups }}"
 
-    - set_fact: 
+    - name: Get backend_servers
+      set_fact: 
         backend_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
       # run_once: true
 
