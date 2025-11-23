@@ -1,9 +1,9 @@
 - name: Include vars from role
-  include_vars:
+  ansible.builtin.include_vars:
     dir: vars
 
 - name: Get backend_servers
-  set_fact: 
+  ansible.builtin.set_fact: 
     backend_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
   # run_once: true
 
