@@ -1,2 +1,3 @@
 del_*
 .ansible_vault.txt
+vault_password.txt
