@@ -1,11 +1,11 @@
+- name: Include vars from role
+  include_vars:
+    dir: vars
+
 - name: Get backend_servers
   set_fact: 
     backend_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
   # run_once: true
-
-- name: Include vars from role
-  include_vars:
-    dir: vars
 
 - name: Create nginx config directory
   ansible.builtin.file:
@@ -22,7 +22,7 @@
   become: true
 
 - name: Pull and run nginx
-  docker_container:
+  community.docker.docker_container:
     name: nginx-lb
     image: nginx:latest
     state: started
