@@ -1,10 +1,10 @@
 - name: Обновление пакетов
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
   become: true
 
 - name: Установка необходимых зависимостей
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-utils
       - apt-transport-https
