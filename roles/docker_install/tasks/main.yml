@@ -37,7 +37,7 @@
   apt:
     name: docker-ce
     state: latest
-    update_cache: yes
+    update_cache: true
   become: true
 
 # - name: add {{ ansible_user }}
