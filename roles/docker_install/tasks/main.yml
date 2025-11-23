@@ -6,6 +6,7 @@
 - name: Установка необходимых зависимостей
   apt:
     name:
+      - apt-utils
       - apt-transport-https
       - ca-certificates
       - curl
