@@ -18,7 +18,7 @@
   ansible.builtin.template:
     src: .env.j2
     dest: /opt/redmine/.env
-    # mode: '0644'
+    mode: '0644'
     owner: "1000"
     group: "1000"
   become: true
@@ -31,8 +31,6 @@
     state: started
     env_file: /opt/redmine/.env
     ports: "{{ redmine_port }}:3000"
-    # networks:
-    #   - name: redmine-network
     # environment:
     #   PYTHONPATH: ~/app/lib/python3.*/site-packages
     volumes:
