@@ -22,7 +22,8 @@
     
 
     - name: start datadog
+      when: "'webservers' in group_names"
       import_role:
         name: datadog.datadog
       become: yes
-      when: "'webservers' in group_names"
+      
