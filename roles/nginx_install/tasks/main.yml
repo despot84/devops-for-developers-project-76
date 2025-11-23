@@ -23,11 +23,11 @@
 
 - name: Pull and run nginx
   community.docker.docker_container:
-    name: nginx-lb
-    image: nginx:latest
+    name: "{{ nginx_container_name }}"
+    image: "{{ nginx_image }}"
     state: started
     restart_policy: always
     ports:
-      - "80:80"
+      - "{{ nginx_host_port }}:{{ nginx_container_port }}"
     volumes:
       - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
