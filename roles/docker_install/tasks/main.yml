@@ -25,7 +25,7 @@
   register: os_release
 
 - name: Установка переменной для кодового имени
-  set_fact:
+  ansible.builtin.set_fact:
     ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
 
 - name: Добавление репозитория Docker
