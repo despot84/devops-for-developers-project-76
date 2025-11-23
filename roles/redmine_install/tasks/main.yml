@@ -2,8 +2,8 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    # owner: root
-    # group: root
+    owner: 1000
+    group: 1000
   loop:
     - /opt/redmine/data
     - /opt/redmine/files
