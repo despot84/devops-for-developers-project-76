@@ -5,24 +5,23 @@
   become_user: root
 
   tasks:
-    - name: docker_install
+    - name: Docker install
       include_role:
         name: docker_install
       tags: req
 
-    - name: redmine_install
+    - name: Redmine install
       when: "'webservers' in group_names"
       include_role:
         name: redmine_install  
 
-    - name: nginx_install
+    - name: Nginx install
       when: "'load_balancer' in group_names"
       include_role:
         name: nginx_install
-    
 
-    - name: start datadog
+    - name: Start datadog
       when: "'webservers' in group_names"
-      import_role:
+      ansible.builtin.import_role:
         name: datadog.datadog
       become: true
