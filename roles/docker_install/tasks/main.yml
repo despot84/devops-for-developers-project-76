@@ -24,14 +24,16 @@
   shell: cat /etc/os-release
   register: os_release
 
-- name: Установка переменной для кодового имени
-  ansible.builtin.set_fact:
-    ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
+# - name: Установка переменной для кодового имени
+#   ansible.builtin.set_fact:
+#     docker_install_ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
 
 - name: Добавление репозитория Docker
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version }} stable
     state: present
+  vars:
+    ubuntu_version: "{{ os_release.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
   become: true  
 
 - name: Установка Docker CE
