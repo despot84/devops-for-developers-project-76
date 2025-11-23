@@ -6,8 +6,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: "1000"
-    group: "1000"
+    owner: root
+    group: root
   loop:
     - /opt/redmine/data
     - /opt/redmine/files
@@ -19,8 +19,8 @@
     src: .env.j2
     dest: /opt/redmine/.env
     mode: '0644'
-    owner: "1000"
-    group: "1000"
+    owner: root
+    group: root
   become: true
 
 - name: Deploy Redmine
