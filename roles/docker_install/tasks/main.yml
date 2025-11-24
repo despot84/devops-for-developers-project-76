@@ -12,7 +12,6 @@
       - curl
       - software-properties-common
     state: present
-  # ignore_errors: true
 
 - name: Добавление GPG ключа Docker
   ansible.builtin.apt_key:
@@ -21,20 +20,12 @@
   become: true
 
 - name: Получение версии Ubuntu
-  # ansible.builtin.shell: cat /etc/os-release
-  # register: docker_install_os
   ansible.builtin.setup:
-
-# - name: Установка переменной для кодового имени
-#   ansible.builtin.set_fact:
-#     docker_install_os_version: "{{ docker_install_os.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
 
 - name: Добавление репозитория Docker
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     state: present
-  # vars:
-  #   ubuntu_version: "{{ docker_install_os.stdout_lines | select('match', '^VERSION_CODENAME=') | first | regex_replace('VERSION_CODENAME=', '') }}"
   become: true
 
 - name: Установка Docker CE
@@ -43,17 +34,3 @@
     state: present
     update_cache: true
   become: true
-
-# - name: add {{ ansible_user }}
-#   shell: |
-#     usermod -aG docker {{ ansible_user }}
-#     newgrp docker
-#   become: true
-
-
-# - name: Убедиться, что Docker запущен
-#   service:
-#     name: docker
-#     state: started
-#     enabled: yes
-#   become: true

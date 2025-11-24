@@ -5,7 +5,6 @@
 - name: Get backend_servers
   ansible.builtin.set_fact:
     nginx_install_backend_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
-  # run_once: true
 
 - name: Create nginx config directory
   ansible.builtin.file:

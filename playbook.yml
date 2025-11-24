@@ -1,8 +1,6 @@
 - name: "Деплой Docker-образов с помощью Ansible"
   hosts: all
   gather_facts: true
-  # become_method: sudo
-  # become_user: root
 
   tasks:
     - name: Docker install

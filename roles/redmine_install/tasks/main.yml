@@ -6,7 +6,6 @@
     owner: 1000
     group: 1000
   loop:
-    # - /opt/redmine/data
     - /opt/redmine/files
     - /opt/redmine/plugins
   become: true
@@ -16,8 +15,6 @@
     src: .env.j2
     dest: /opt/redmine/.env
     mode: '0644'
-    # owner: root
-    # group: root
   become: true
 
 - name: Deploy Redmine
@@ -28,8 +25,6 @@
     state: started
     env_file: /opt/redmine/.env
     ports: "{{ redmine_port }}:3000"
-    # environment:
-    #   PYTHONPATH: ~/app/lib/python3.*/site-packages
     volumes:
       - /opt/redmine/files:/usr/src/redmine/files
       - /opt/redmine/plugins:/usr/src/redmine/plugins
